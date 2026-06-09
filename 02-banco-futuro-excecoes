@@ -1,1 +1,34 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            // Tenta ler o saldo e o saque como números inteiros
+            int saldoAtual = scanner.nextInt();
+            int saqueSolicitado = scanner.nextInt();
+
+            // Regra 1: Validação do valor do saque (não pode ser negativo ou zero)
+            if (saqueSolicitado <= 0) {
+                System.out.println("Valor invalido");
+            } 
+            // Regra 2: Validação de saldo suficiente
+            else if (saqueSolicitado > saldoAtual) {
+                System.out.println("Saldo insuficiente");
+            } 
+            // Sucesso: Realiza o saque e mostra o novo saldo
+            else {
+                int novoSaldo = saldoAtual - saqueSolicitado;
+                System.out.println(novoSaldo);
+            }
+
+        } catch (InputMismatchException e) {
+            // Captura o erro caso a entrada não seja um número inteiro (ex: "abc")
+            System.out.println("Entrada invalida");
+        } finally {
+            scanner.close();
+        }
+    }
+}
